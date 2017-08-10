@@ -26,7 +26,6 @@
  */
 package org.onecmdb.dto;
 
-import java.io.OutputStream;
 import java.util.Comparator;
 
 public interface IValue {
@@ -71,8 +70,6 @@ public interface IValue {
      * <code>null</code>!
      */
     String getAsString();
-
-    OutputStream asOutputStream();
 
     /**
      * Returns a string representation of the <em>value</em> held by this

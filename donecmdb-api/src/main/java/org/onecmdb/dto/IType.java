@@ -26,7 +26,6 @@
  */
 package org.onecmdb.dto;
 
-import java.io.InputStream;
 import java.util.Set;
 
 /**
@@ -44,14 +43,6 @@ public interface IType {
      * @param
      */
     ItemId getId();
-
-    /**
-     * Describes this type in a unambiguous way, in a user understandable
-     * representation.
-     *
-     * @return The string representation of this type.
-     */
-    public String toString();
 
     /**
      * Is this type is regarded as a <em>blueprint</em>. Blueprints can
@@ -123,7 +114,6 @@ public interface IType {
      */
     public IValue parseString(String s);
 
-    public IValue parseInputStream(InputStream in);
 
 //	public IValueSelector getValueSelector();
 

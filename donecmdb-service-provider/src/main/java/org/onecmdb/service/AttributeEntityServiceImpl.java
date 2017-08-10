@@ -27,4 +27,9 @@ public class AttributeEntityServiceImpl extends CURDServiceBase<AttributeEntity>
     public List<AttributeEntity> getAttributesWithAlias(@NotNull Long ownerId, @NotNull String alias) {
         return dao.findByOwnerIdAndAlias(ownerId, alias);
     }
+
+    @Override
+    public List<AttributeEntity> getAttributesWithOwnerId(@NotNull Long ownerId) {
+        return dao.findByOwnerId(ownerId);
+    }
 }

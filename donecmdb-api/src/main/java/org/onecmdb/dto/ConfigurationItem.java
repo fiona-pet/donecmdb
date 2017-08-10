@@ -33,6 +33,8 @@ public class ConfigurationItem implements ICi {
         return ciEntity.getDisplayName();
     }
 
+
+
     @Override
     public ItemId getId() {
         return new ItemId(ciEntity.getId());
@@ -115,7 +117,6 @@ public class ConfigurationItem implements ICi {
         return "";
     }
 
-
     @Override
     public String getIcon() {
         return null;
@@ -128,11 +129,6 @@ public class ConfigurationItem implements ICi {
 
     @Override
     public IValue parseString(String s) {
-        return null;
-    }
-
-    @Override
-    public IValue parseInputStream(InputStream in) {
         return null;
     }
 

@@ -1,5 +1,7 @@
 package org.onecmdb.dto;
 
+import java.util.List;
+
 /**
  * Created by tom on 2017/8/10.
  */

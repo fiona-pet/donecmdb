@@ -29,7 +29,7 @@ public class ModelServiceImpl implements ModelService{
     public ICi getRoot() {
         CiEntity ciEntity = ciEntityService.findCi(new Path<>(rootAlias));
 
-        List<AttributeEntity> attributeEntitys = attributeEntityService.getAttributesWithAlias(ciEntity.getId(), ciEntity.getAlias());
+        List<AttributeEntity> attributeEntitys = attributeEntityService.getAttributesWithOwnerId(ciEntity.getId());
 
         return toIci(ciEntity, attributeEntitys);
     }
