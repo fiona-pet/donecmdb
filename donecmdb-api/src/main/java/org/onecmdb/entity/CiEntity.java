@@ -118,11 +118,4 @@ public class CiEntity extends IdEntity {
     @ApiModelProperty(value = "创建时间")
     @Column(columnDefinition = "创建时间")
     private String createTime;
-
-    /**
-     * 所属者id
-     */
-    @ApiModelProperty(value = "所属者id")
-    @Column(columnDefinition = "所属者id")
-    private String ownerId;
 }

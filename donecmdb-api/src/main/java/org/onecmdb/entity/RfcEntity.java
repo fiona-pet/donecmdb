@@ -37,7 +37,7 @@ public class RfcEntity extends IdEntity {
     @ApiModelProperty(value = "父级id")
     @Column(columnDefinition = "父级id")
     private Integer parentId;
-    
+
     /**
      * 目标id
      */

@@ -102,6 +102,13 @@ public class AttributeEntity extends IdEntity {
     private String valueAsDate;
 
     /**
+     * 所属者id
+     */
+    @ApiModelProperty(value = "所属者id")
+    @Column(columnDefinition = "所属者id")
+    private String ownerId;
+
+    /**
      * 最长
      */
     @ApiModelProperty(value = "最长")
