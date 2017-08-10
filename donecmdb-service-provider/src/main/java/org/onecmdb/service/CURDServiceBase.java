@@ -73,7 +73,7 @@ public abstract class CURDServiceBase<T extends Idable> implements CURDService<T
         return page;
     }
 
-    public T detail(String uuid) {
+    public T detail(Long uuid) {
         return this.getDao().findOne(uuid);
     }
 
@@ -110,7 +110,7 @@ public abstract class CURDServiceBase<T extends Idable> implements CURDService<T
         return getDao().save(entity);
     }
 
-    public void delete(String uuid) {
+    public void delete(Long uuid) {
         Object entity = getDao().findOne(uuid);
         try {
             boolean isCustom = true;

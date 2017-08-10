@@ -15,7 +15,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @NoRepositoryBean
-public interface DaoBase<T> extends JpaRepository<T, String>, JpaSpecificationExecutor<T> {
+public interface DaoBase<T> extends JpaRepository<T, Long>, JpaSpecificationExecutor<T> {
 
     List<T> findAllBy();
 }

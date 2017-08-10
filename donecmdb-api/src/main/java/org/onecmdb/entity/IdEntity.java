@@ -25,18 +25,13 @@ import lombok.Setter;
 @Setter
 @Getter
 public abstract class IdEntity implements Idable, Serializable {
-
-    protected String id;
+    protected Long id;
 
     @Id
     @Column(name = "id", columnDefinition = "id")
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
-    public String getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }

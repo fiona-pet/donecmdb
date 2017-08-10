@@ -19,11 +19,11 @@ public interface CURDService<T> {
 
     List<T> list(ListFilter listFilter);
 
-    Page<T> page(PageSearch var1);
+    Page<T> page(PageSearch pageSearch);
 
-    T detail(String var1);
+    T detail(Long id);
 
-    T createOrUpdte(T var1);
+    T createOrUpdte(T entity);
 
-    void delete(String var1);
+    void delete(Long id);
 }

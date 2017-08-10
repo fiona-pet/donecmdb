@@ -6,6 +6,9 @@ import org.onecmdb.repository.AttributeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
+import java.util.List;
+
 /**
  * 属性信息
  *
@@ -20,4 +23,8 @@ public class AttributeEntityServiceImpl extends CURDServiceBase<AttributeEntity>
     @Autowired
     private AttributeDao dao;
 
+    @Override
+    public List<AttributeEntity> getAttributesWithAlias(@NotNull Long ownerId, @NotNull String alias) {
+        return dao.findByOwnerIdAndAlias(ownerId, alias);
+    }
 }

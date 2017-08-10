@@ -106,7 +106,7 @@ public class AttributeEntity extends IdEntity {
      */
     @ApiModelProperty(value = "所属者id")
     @Column(columnDefinition = "所属者id")
-    private String ownerId;
+    private Long ownerId;
 
     /**
      * 最长

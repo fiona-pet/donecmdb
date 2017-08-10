@@ -9,6 +9,8 @@ import org.onecmdb.entity.CiEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  *  模型 接口 服务
  * Created by tom on 2017/8/10.
@@ -26,13 +28,14 @@ public class ModelServiceImpl implements ModelService{
     @Override
     public ICi getRoot() {
         CiEntity ciEntity = ciEntityService.findCi(new Path<>(rootAlias));
-        AttributeEntity attributeEntity = null;//attributeEntityService
 
-        return toIci(ciEntity, attributeEntity);
+        List<AttributeEntity> attributeEntitys = attributeEntityService.getAttributesWithAlias(ciEntity.getId(), ciEntity.getAlias());
+
+        return toIci(ciEntity, attributeEntitys);
     }
 
-    private ICi toIci(CiEntity ciEntity, AttributeEntity attributeEntity) {
-        ICi ci = new ConfigurationItem(ciEntity, attributeEntity);
+    private ICi toIci(CiEntity ciEntity, List<AttributeEntity>  attributeEntitys) {
+        ICi ci = new ConfigurationItem(ciEntity, attributeEntitys);
 
         return ci;
     }

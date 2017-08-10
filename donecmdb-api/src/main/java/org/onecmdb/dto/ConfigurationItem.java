@@ -6,6 +6,7 @@ import org.onecmdb.entity.AttributeEntity;
 import org.onecmdb.entity.CiEntity;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,11 +21,11 @@ public class ConfigurationItem implements ICi {
      * ci 实体
      */
     private CiEntity ciEntity;
-    private AttributeEntity attributeEntity;
+    private List<AttributeEntity> attributeEntitys;
 
-    public ConfigurationItem(CiEntity ciEntity, AttributeEntity attributeEntity) {
+    public ConfigurationItem(CiEntity ciEntity, List<AttributeEntity> attributeEntitys) {
         this.ciEntity = ciEntity;
-        this.attributeEntity = attributeEntity;
+        this.attributeEntitys = attributeEntitys;
     }
 
     @Override

@@ -51,14 +51,14 @@ public abstract class ConverterRestServiceBase<A, B> extends DefaultDataConverte
     }
 
     @Override
-    public RestResult<String> delete(String uuid) {
+    public RestResult<String> delete(Long uuid) {
         LOGGER.debug("delete :{}", uuid);
         this.getService().delete(uuid);
         return RestResult.OK("删除成功!");
     }
 
     @Override
-    public RestResult<A> detail(String uuid) {
+    public RestResult<A> detail(Long uuid) {
         B entity = getService().detail(uuid);
         A dto = doForward(entity);
         return RestResult.OK(dto);

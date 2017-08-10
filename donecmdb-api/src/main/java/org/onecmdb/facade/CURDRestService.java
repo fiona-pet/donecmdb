@@ -35,7 +35,7 @@ public interface CURDRestService<T> {
     @GET
     @Path("{id}")
     @ApiOperation("详细信息")
-    RestResult<T> detail(@ApiParam("id") @PathParam("id") String var1);
+    RestResult<T> detail(@ApiParam("id") @PathParam("id") Long id);
 
     @POST
     @ApiOperation("添加/修改")
@@ -44,5 +44,5 @@ public interface CURDRestService<T> {
     @DELETE
     @Path("{id}")
     @ApiOperation("删除")
-    RestResult<String> delete(@ApiParam("id") @PathParam("id") String var1);
+    RestResult<String> delete(@ApiParam("id") @PathParam("id") Long id);
 }
