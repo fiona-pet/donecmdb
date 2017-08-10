@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.onecmdb.TestSmartApplication;
+import org.onecmdb.dto.ICi;
 import org.onecmdb.dto.Path;
 import org.onecmdb.entity.CiEntity;
 import org.onecmdb.entity.User;

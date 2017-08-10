@@ -1,12 +1,11 @@
 package org.onecmdb.service;
 
 import lombok.Getter;
-import org.hibernate.validator.constraints.NotBlank;
+import org.onecmdb.dto.ConfigurationItem;
+import org.onecmdb.dto.ICi;
 import org.onecmdb.dto.IPath;
 import org.onecmdb.entity.CiEntity;
-import org.onecmdb.entity.User;
 import org.onecmdb.repository.CiDao;
-import org.onecmdb.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +32,9 @@ public class CiEntityServiceImpl extends CURDServiceBase<CiEntity> implements Ci
     @Override
     public CiEntity findCiByAlias(@NotNull IPath<String> path) {
         String name = path.getLeaf();
-        return dao.findByAlias(name);
+
+        CiEntity ciEntity = dao.findByAlias(name);
+
+        return ciEntity;
     }
 }
