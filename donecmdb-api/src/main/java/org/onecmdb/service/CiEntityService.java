@@ -1,7 +1,10 @@
 package org.onecmdb.service;
 
 import org.onecmdb.dto.IPath;
+import org.onecmdb.dto.ListFilter;
 import org.onecmdb.entity.CiEntity;
+
+import java.util.List;
 
 /**
  * Created by tom on 2017/8/10.
@@ -21,4 +24,12 @@ public interface CiEntityService  extends CURDService<CiEntity> {
      * @return
      */
     CiEntity findCiByAlias(IPath<String> path);
+
+    /**
+     *
+     * @param alias
+     * @param listFilter
+     * @return
+     */
+    List<CiEntity> getInstanceByAlias(String alias, ListFilter listFilter);
 }

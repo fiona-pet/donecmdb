@@ -4,12 +4,14 @@ import lombok.Getter;
 import org.onecmdb.dto.ConfigurationItem;
 import org.onecmdb.dto.ICi;
 import org.onecmdb.dto.IPath;
+import org.onecmdb.dto.ListFilter;
 import org.onecmdb.entity.CiEntity;
 import org.onecmdb.repository.CiDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * 用户信息
@@ -36,5 +38,14 @@ public class CiEntityServiceImpl extends CURDServiceBase<CiEntity> implements Ci
         CiEntity ciEntity = dao.findByAlias(name);
 
         return ciEntity;
+    }
+
+    @Override
+    public List<CiEntity> getInstanceByAlias(String alias, ListFilter listFilter) {
+        CiEntity ciEntity = dao.findByAlias(alias);
+
+        List<CiEntity> instances = dao.findByPathLikeAndIsBlueprint(ciEntity.getPath()+"/%", false);
+
+        return instances;
     }
 }
