@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.onecmdb.TestSmartApplication;
+import org.onecmdb.dto.CiDTO;
 import org.onecmdb.dto.Path;
 import org.onecmdb.entity.AttributeEntity;
 import org.onecmdb.entity.CiEntity;
@@ -40,7 +41,7 @@ public class ModelServiceTest {
 
     @Test
     public void list(){
-        List<Map<String, String>> cis = modelService.list(alias, null);
+        List<CiDTO> cis = modelService.list(alias, null);
 
         Assert.assertNotNull(cis);
 

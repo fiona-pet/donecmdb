@@ -2,10 +2,7 @@ package org.onecmdb.service;
 
 import lombok.Getter;
 import org.apache.commons.collections.map.HashedMap;
-import org.onecmdb.dto.ConfigurationItem;
-import org.onecmdb.dto.ICi;
-import org.onecmdb.dto.ListFilter;
-import org.onecmdb.dto.Path;
+import org.onecmdb.dto.*;
 import org.onecmdb.entity.AttributeEntity;
 import org.onecmdb.entity.CiEntity;
 import org.onecmdb.utils.StringUtils;
@@ -42,29 +39,26 @@ public class ModelServiceImpl implements ModelService{
     }
 
     @Override
-    public List<Map<String, String>> list(String alias, ListFilter listFilter) {
+    public List<CiDTO> list(String alias, ListFilter listFilter) {
         List<CiEntity> ciEntityList = ciEntityService.getInstanceByAlias(alias, listFilter);
 
-        List<Map<String, String>> result = new ArrayList<>();
+        List<CiDTO> result = new ArrayList<>();
 
         for (CiEntity ciEntity: ciEntityList){
-            Map<String, String> map = new HashMap<String,String>();
-            map.put("id", ciEntity.getId()+"");
-            map.put("displayNameExpress", ciEntity.getDisplayName());
-            map.put("alias", ciEntity.getAlias());
-            map.put("path", ciEntity.getPath());
-            map.put("lastModified", ciEntity.getLastModified());
-            map.put("createTime", ciEntity.getCreateTime());
+            CiDTO ciDTO = new CiDTO(ciEntity);
+            String displayNameExpress = ciEntity.getDisplayName();
 
             List<AttributeEntity> attributeEntityList = attributeEntityService.getAttributesWithOwnerId(ciEntity.getId());
+
+            Map<String, String> map = new HashMap<String, String>();
 
             for (AttributeEntity attributeEntity: attributeEntityList){
                 map.put(attributeEntity.getAlias(), getValue(attributeEntity));
             }
 
-            map.put("displayName", StringUtils.renderString(map.get("displayNameExpress"), map));
+            ciDTO.setDisplayName(StringUtils.renderString(displayNameExpress, map));
 
-            result.add(map);
+            result.add(ciDTO);
         }
 
         return result;

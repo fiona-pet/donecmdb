@@ -9,6 +9,7 @@ import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * Created by tom on 2017/8/8.
@@ -110,12 +111,12 @@ public class CiEntity extends IdEntity {
      */
     @ApiModelProperty(value = "最后修改时间")
     @Column(columnDefinition = "最后修改时间")
-    private String lastModified;
+    private Date lastModified;
 
     /**
      * 创建时间
      */
     @ApiModelProperty(value = "创建时间")
     @Column(columnDefinition = "创建时间")
-    private String createTime;
+    private Date createTime;
 }

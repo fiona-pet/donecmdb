@@ -1,5 +1,6 @@
 package org.onecmdb.service;
 
+import org.onecmdb.dto.CiDTO;
 import org.onecmdb.dto.ICi;
 import org.onecmdb.dto.ListFilter;
 
@@ -17,5 +18,5 @@ public interface ModelService {
      */
     ICi getRoot();
 
-    List<Map<String, String>> list(String alias, ListFilter listFilter);
+    List<CiDTO> list(String alias, ListFilter listFilter);
 }
