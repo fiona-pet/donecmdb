@@ -39,7 +39,7 @@ public class AttributeEntityDaoTest {
         Long ownerId = 100l;
         String alias = "Ci";
 
-        List<AttributeEntity> entities = dao.findByOwnerIdAndAlias(ownerId, alias);
+        AttributeEntity entities = dao.findByOwnerIdAndAlias(ownerId, alias);
 
         Assert.assertNotNull(entities);
 

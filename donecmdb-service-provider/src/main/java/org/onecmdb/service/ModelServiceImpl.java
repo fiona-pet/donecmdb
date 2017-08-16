@@ -6,6 +6,8 @@ import org.onecmdb.dto.*;
 import org.onecmdb.entity.AttributeEntity;
 import org.onecmdb.entity.CiEntity;
 import org.onecmdb.utils.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wildfly.swarm.config.jmx.configuration.Handler;
@@ -22,6 +24,7 @@ import java.util.Map;
 @Service
 @Getter
 public class ModelServiceImpl implements ModelService{
+    private static final Logger LOGGER = LoggerFactory.getLogger(ModelServiceImpl.class);
     private String rootAlias = "Ci";
 
     @Autowired
@@ -30,13 +33,12 @@ public class ModelServiceImpl implements ModelService{
     private AttributeEntityService attributeEntityService;
 
     @Override
-    public ICi getRoot() {
+    public CiDTO getRoot() {
         CiEntity ciEntity = ciEntityService.findCi(new Path<>(rootAlias));
 
-        List<AttributeEntity> attributeEntitys = attributeEntityService.getAttributesWithOwnerId(ciEntity.getId());
-
-        return toIci(ciEntity, attributeEntitys);
+        return toIci(ciEntity, true);
     }
+
 
     @Override
     public List<CiDTO> list(String alias, ListFilter listFilter) {
@@ -45,18 +47,7 @@ public class ModelServiceImpl implements ModelService{
         List<CiDTO> result = new ArrayList<>();
 
         for (CiEntity ciEntity: ciEntityList){
-            CiDTO ciDTO = new CiDTO(ciEntity);
-            String displayNameExpress = ciEntity.getDisplayName();
-
-            List<AttributeEntity> attributeEntityList = attributeEntityService.getAttributesWithOwnerId(ciEntity.getId());
-
-            Map<String, String> map = new HashMap<String, String>();
-
-            for (AttributeEntity attributeEntity: attributeEntityList){
-                map.put(attributeEntity.getAlias(), getValue(attributeEntity));
-            }
-
-            ciDTO.setDisplayName(StringUtils.renderString(displayNameExpress, map));
+            CiDTO ciDTO = toIci(ciEntity, true);
 
             result.add(ciDTO);
         }
@@ -64,19 +55,50 @@ public class ModelServiceImpl implements ModelService{
         return result;
     }
 
+    @Override
+    public CiDTO getCiById(Long id, boolean isRef) {
+        LOGGER.debug("get ci by id:{}", id);
+        CiEntity ciEntity = ciEntityService.detail(id);
 
-
-    private String getValue(AttributeEntity attributeEntity) {
-        if (attributeEntity.getTypeName().startsWith("oneCMDB:")){
-            return attributeEntity.getValueAsString();
-        }else{
-            return attributeEntity.getValueAsString();
-        }
+        return toIci(ciEntity, isRef);
     }
 
-    private ICi toIci(CiEntity ciEntity, List<AttributeEntity>  attributeEntitys) {
-        ICi ci = new ConfigurationItem(ciEntity, attributeEntitys);
 
-        return ci;
+    private CiDTO toIci(CiEntity ciEntity, boolean isRef) {
+        CiDTO ciDTO = new CiDTO(ciEntity);
+        String displayNameExpress = ciEntity.getDisplayName();
+
+        Map<String, String> map = new HashMap<String, String>();
+
+        List<AttributeEntity> attributeEntityList = attributeEntityService.getAttributesWithOwnerId(ciEntity.getId());
+        List<AttributeDTO> attributeDTOs = new ArrayList<AttributeDTO>();
+
+        for (AttributeEntity attributeEntity: attributeEntityList){
+            LOGGER.debug("attribute id:{}", attributeEntity.getId());
+
+            AttributeDTO attributeDTO = new AttributeDTO(attributeEntity);
+
+            if (attributeEntity.getComplexValue() && isRef) {
+                ItemId itemId = new ItemId(attributeEntity.getValueAsString());
+
+                LOGGER.debug("ref ci id:{}", itemId.asLong());
+                CiEntity refCiEntity= ciEntityService.detail(itemId.asLong());
+
+                CiDTO targetCiDTO = getCiById(refCiEntity.getTargetId(), false);
+
+                map.put(attributeEntity.getAlias(), targetCiDTO.getDisplayName());
+
+                attributeDTO.setValue(targetCiDTO.getDisplayName());
+            }else{
+                map.put(attributeEntity.getAlias(), attributeDTO.getValue());
+            }
+
+            attributeDTOs.add(attributeDTO);
+        }
+
+        ciDTO.setAttributeDTOList(attributeDTOs);
+        ciDTO.setDisplayName(StringUtils.renderString(displayNameExpress, map));
+
+        return ciDTO;
     }
 }

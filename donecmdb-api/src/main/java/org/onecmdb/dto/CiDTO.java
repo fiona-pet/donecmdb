@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 配置 对象
@@ -42,7 +43,11 @@ public class CiDTO {
      */
     private String path;
 
+    private List<AttributeDTO> attributeDTOList;
+
     public CiDTO(@NotNull CiEntity entity) {
         BeanUtils.copyProperties(entity, this);
     }
+
+
 }

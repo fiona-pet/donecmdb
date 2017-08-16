@@ -76,7 +76,7 @@ public class CiEntity extends IdEntity {
      */
     @ApiModelProperty(value = "源id")
     @Column(columnDefinition = "源id")
-    private String sourceId;
+    private Long sourceId;
 
     /**
      * 源属性id
@@ -90,7 +90,7 @@ public class CiEntity extends IdEntity {
      */
     @ApiModelProperty(value = "指标id")
     @Column(columnDefinition = "指标id")
-    private String targetId;
+    private Long targetId;
 
     /**
      * 模版id

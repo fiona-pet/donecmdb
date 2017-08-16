@@ -35,6 +35,7 @@ import java.util.UUID;
  * <em>longHash</em>, one may extract creation and modifaction timestamps.
  */
 public class ItemId implements Serializable, Comparable {
+    public static final String NAMESPACE  = "oneCMDB:#";
 
     private static final long serialVersionUID = 98836700497597228L;
     private final long longHash;
@@ -67,40 +68,11 @@ public class ItemId implements Serializable, Comparable {
      * @see #toString
      */
     public ItemId(final String text) {
-        String parseOrig;
-        if (text.startsWith("#") && text.length() >= 1) {
-            parseOrig = text.substring(1);
-        } else {
-            parseOrig = text;
+        String idStr = text;
+        if (text.indexOf(NAMESPACE)>-1){
+            idStr = text.replace(NAMESPACE, "");
         }
-        if (parseOrig.indexOf('?') != -1) {
-            parseOrig = parseOrig.substring(0, parseOrig.indexOf('?'));
-        }
-
-
-        long longId;
-        try {
-            String parse = parseOrig;
-            while (parse.length() < 16) {
-                parse = "0" + parse;
-            }
-            String upper = parse.substring(0, 8);
-            String lower = parse.substring(8, 16);
-
-            Long u = Long.parseLong(upper, 16);
-            Long l = Long.parseLong(lower, 16);
-            longId = (u << 32) | l;
-
-        } catch (NumberFormatException e) {
-            try {
-                // fallback to parse a decimal string
-                longId = Long.parseLong(parseOrig);
-            } catch (NumberFormatException e2) {
-                throw new IllegalArgumentException("Cannot convert '" + text
-                        + "' into an identifier!");
-            }
-        }
-        this.longHash = longId;
+        this.longHash = Long.parseLong(idStr);
     }
 
     public long asLong() {

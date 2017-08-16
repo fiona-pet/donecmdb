@@ -46,7 +46,7 @@ public class CiEntityServiceTest {
 
         LOGGER.debug("id:{}, ci:{}", ciEntity.getId(), ciEntity);
 
-        List<AttributeEntity> attributeEntitys = attributeEntityService.getAttributesWithAlias(ciEntity.getId(), ciEntity.getAlias());
+        AttributeEntity attributeEntitys = attributeEntityService.getAttributesWithAlias(ciEntity.getId(), ciEntity.getAlias());
 
         LOGGER.debug("attributes:{}", attributeEntitys);
     }

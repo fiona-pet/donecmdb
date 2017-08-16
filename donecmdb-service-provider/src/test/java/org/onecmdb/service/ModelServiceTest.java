@@ -48,4 +48,10 @@ public class ModelServiceTest {
         LOGGER.debug("alias:{}, list:{}", alias, cis);
 
     }
+
+    @Test
+    public void getById(){
+        CiDTO ciDTO = modelService.getCiById(-7048484407295153374l, true);
+        LOGGER.debug("ciDTO:{}", ciDTO);
+    }
 }

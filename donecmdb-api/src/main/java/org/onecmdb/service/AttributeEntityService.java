@@ -15,7 +15,7 @@ public interface AttributeEntityService extends CURDService<AttributeEntity> {
      * @param alias
      * @return
      */
-    List<AttributeEntity> getAttributesWithAlias(@NotNull Long ownerId, @NotNull String alias);
+    AttributeEntity getAttributesWithAlias(@NotNull Long ownerId, @NotNull String alias);
 
     /**
      * 根据所属id 查询 属性信息

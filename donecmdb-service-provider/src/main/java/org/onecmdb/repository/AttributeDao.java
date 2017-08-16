@@ -17,7 +17,7 @@ public interface AttributeDao extends DaoBase<AttributeEntity> {
      * @param alias 别名
      * @return
      */
-    List<AttributeEntity> findByOwnerIdAndAlias(Long ownerId, String alias);
+    AttributeEntity findByOwnerIdAndAlias(Long ownerId, String alias);
 
     /**
      * 根据 所属者 获取 属性列表
