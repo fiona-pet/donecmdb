@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.onecmdb.TestSmartApplication;
+import org.onecmdb.dto.AttributeDTO;
 import org.onecmdb.dto.CiDTO;
 import org.onecmdb.dto.Path;
 import org.onecmdb.entity.AttributeEntity;
@@ -16,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -53,5 +55,10 @@ public class ModelServiceTest {
     public void getById(){
         CiDTO ciDTO = modelService.getCiById(-7048484407295153374l, true);
         LOGGER.debug("ciDTO:{}", ciDTO);
+    }
+    @Test
+    public void create(){
+        CiDTO ciDTO = modelService.getCiByPath(new Path<String>(alias));
+        LOGGER.debug("create ciDTO:{}", ciDTO);
     }
 }

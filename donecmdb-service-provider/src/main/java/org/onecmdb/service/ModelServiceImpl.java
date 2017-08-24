@@ -57,10 +57,22 @@ public class ModelServiceImpl implements ModelService{
 
     @Override
     public CiDTO getCiById(Long id, boolean isRef) {
+
+        if (null == id){
+            return null;
+        }
+
         LOGGER.debug("get ci by id:{}", id);
         CiEntity ciEntity = ciEntityService.detail(id);
 
         return toIci(ciEntity, isRef);
+    }
+
+    @Override
+    public CiDTO getCiByPath(Path<String> path) {
+        CiEntity ciEntity = ciEntityService.findCi(path);
+
+        return toIci(ciEntity, true);
     }
 
 
@@ -79,12 +91,16 @@ public class ModelServiceImpl implements ModelService{
             AttributeDTO attributeDTO = new AttributeDTO(attributeEntity);
 
             if (attributeEntity.getComplexValue() && isRef) {
-                ItemId itemId = new ItemId(attributeEntity.getValueAsString());
+                ItemId itemId = new ItemId(attributeEntity.getReftypename());
 
                 LOGGER.debug("ref ci id:{}", itemId.asLong());
                 CiEntity refCiEntity= ciEntityService.detail(itemId.asLong());
 
                 CiDTO targetCiDTO = getCiById(refCiEntity.getTargetId(), false);
+
+                if (null ==  targetCiDTO){
+                    continue;
+                }
 
                 map.put(attributeEntity.getAlias(), targetCiDTO.getDisplayName());
 

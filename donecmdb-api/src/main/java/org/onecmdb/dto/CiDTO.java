@@ -50,4 +50,7 @@ public class CiDTO {
     }
 
 
+    public CiDTO() {
+
+    }
 }

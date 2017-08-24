@@ -28,7 +28,13 @@ public class AttributeDTO {
     public AttributeDTO(AttributeEntity attributeEntity) {
         this.alias = attributeEntity.getAlias();
         this.value = attributeEntity.getValueAsString();
+        this.id = attributeEntity.getId();
     }
+
+    public AttributeDTO() {
+
+    }
+
     public String getValue(){
         return value;
     }

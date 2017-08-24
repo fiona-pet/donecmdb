@@ -2,6 +2,7 @@ package org.onecmdb.service;
 
 import org.onecmdb.dto.CiDTO;
 import org.onecmdb.dto.ListFilter;
+import org.onecmdb.dto.Path;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface ModelService {
      * @return
      */
     CiDTO getCiById(Long id, boolean isRef);
+
+    CiDTO getCiByPath(Path<String> path);
 }

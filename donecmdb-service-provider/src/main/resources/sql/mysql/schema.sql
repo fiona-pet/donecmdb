@@ -79,3 +79,34 @@ CREATE TABLE `t_organize` (
   UNIQUE KEY `UK_code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for t_clazz
+-- ----------------------------
+create table t_clazz{
+  id VARCHAR(36) not null,
+  extend_from_id VARCHAR(36) not null,
+  alias VARCHAR (64) not null UNION ,
+  description VARCHAR (256),
+  modified_time TIMESTAMP ,
+  create_time TIMESTAMP ,
+  PRIMARY key(id),
+}
+
+
+-- ----------------------------
+-- Table structure for t_clazz_property
+-- ----------------------------
+create table t_clazz_property{
+  id VARCHAR(36) not null,
+  owner_id VARCHAR(36) not null,
+  property_type VARCHAR(36) not null,
+  alias VARCHAR (64) not null UNION ,
+  description VARCHAR (256),
+  modified_time TIMESTAMP ,
+  create_time TIMESTAMP ,
+  PRIMARY key(id),
+}
+drop table ORDERS;
+CREATE TABLE ORDERS (ID VARCHAR(36) NOT NULL COMMENT 'id' , ORDER_NAME VARCHAR(20) COMMENT '名称' , PRIMARY KEY (ID))  COMMENT '订单';
+
+

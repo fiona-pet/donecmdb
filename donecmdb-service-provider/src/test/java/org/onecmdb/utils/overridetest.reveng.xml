@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering SYSTEM "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+
+	<!--
+		alter table Customer add constraint 'max' foreign key (addressid, x) references address (dfdf)
+	-->
+	<table name="ORDERS">
+		<primary-key>
+			<generator class="auto">
+			</generator>
+		</primary-key>
+	</table>
+
+
+   
+
+
+
+
+
+</hibernate-reverse-engineering>

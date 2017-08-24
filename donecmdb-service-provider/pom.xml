@@ -72,5 +72,11 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-tools</artifactId>
+            <version>5.2.5.Final</version>
+        </dependency>
+
     </dependencies>
 </project>
